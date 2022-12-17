@@ -1,0 +1,305 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;600&display=swap');
+
+/* font-family: 'Josefin Sans', sans-serif; */
+
+:root {
+    --desaturated-red: hsl(0, 36%, 70%);
+    --soft-red: hsl(0, 93%, 68%);
+    --dark-grayish-red: hsl(0, 6%, 24%);
+    --linear-logo: 135deg, hsl(0, 0%, 100%), hsl(0, 100%, 98%);
+    --linear-btn: 135deg, hsl(0, 80%, 86%), hsl(0, 74%, 74%);
+
+    --ff: 'Josefin Sans', sans-serif;
+    
+    --fs-heading: clamp(2rem, 6vw, 3.5rem);
+    --fs-para: clamp(0.8rem, 2vw, 1rem);
+
+    --fw-300: 300;
+    --fw-400: 400;
+    --fw-600: 600;
+}
+
+/* ******************** */
+/*  RESET  */
+/* ******************** */
+
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Remove default margin */
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+figure,
+blockquote,
+dl,
+dd,
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+}
+
+/* Set core root defaults */
+html:focus-within {
+  scroll-behavior: smooth;
+}
+
+/* Set core body defaults */
+body {
+  min-height: 100vh;
+  text-rendering: optimizeSpeed;
+  line-height: 1.5;
+}
+
+/* A elements that don't have a class get default styles */
+a:not([class]) {
+  text-decoration-skip-ink: auto;
+}
+
+/* Make images easier to work with */
+img,
+picture {
+  max-width: 100%;
+  display: block;
+}
+
+/* Inherit fonts for inputs and buttons */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+/* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within {
+   scroll-behavior: auto;
+  }
+  
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ******************** */
+/*  GLOBAL  */
+/* ******************** */
+
+body {
+    font-family: var(--ff);
+}
+
+.container {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-areas: 
+    "header"
+    "hero-img"
+    "hero-text";
+}
+
+
+/* ******************** */
+/*  HERO  */
+/* ******************** */
+
+.logo {
+    grid-area: header;
+    padding-block: min(5vw, 4rem);
+    padding-inline: 2rem;
+}
+
+.logo > img {
+    width: clamp(6rem, 10vw, 9rem);
+}
+
+.hero-img {
+    grid-area: hero-img;
+    width: 100%;
+}
+
+.hero-img > * {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.hero-text {
+    grid-area: hero-text;
+    max-width: 35rem;
+    text-align: center;
+    padding-inline: 2rem;
+    margin-right: auto;
+    margin-left: auto;
+    margin-block: 3rem 4rem;
+}
+
+@keyframes fadeup {
+    from {
+        transform: translateY(10%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.hero-text > h1 {
+    font-size: var(--fs-heading);
+    text-transform: uppercase;
+    font-weight: var(--fw-600);
+    letter-spacing: 10px;
+    line-height: 1.1;
+    color: var(--dark-grayish-red);
+    margin-block-end: 1.5rem;
+    animation: fadeup 700ms ease-in;
+}
+
+.hero-text h1 span {
+    color: var(--desaturated-red);
+    font-weight: var(--fw-300);
+}
+
+.hero-text > p {
+    font-size: var(--fs-para);
+    color: var(--desaturated-red);
+    line-height: 1.8;
+    margin-block-end: 2rem;
+    animation: fadeup 700ms ease-in;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    animation: fadeup 700ms ease-in;
+}
+
+.email {
+    width: 100%;
+    border: none;
+    border: 1px solid var(--desaturated-red);
+    padding: 0.75rem 1.5rem;
+    border-radius: 1.7rem;
+    color: pink;
+}
+
+.email:focus {
+    outline-color: var(--soft-red);
+}
+
+.email::placeholder {
+    color: var(--desaturated-red);
+    font-size: var(--fs-para);
+}
+
+.btn {
+    border: none;
+    background-image: linear-gradient(var(--linear-btn));
+    padding: 0.95rem 1.7rem;
+    border-radius: 1.7rem;
+    box-shadow: 0 10px 20px -5px var(--desaturated-red);
+    position: absolute;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+}
+
+.btn::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: white;
+    border-radius: inherit;
+    opacity: 0.3;
+    display: none;
+}
+
+.btn:hover::after {
+    display: block;
+}
+
+.error-icon {
+    position: absolute;
+    top: 18%;
+    right: 85px;
+    opacity: 0;
+    transition: opacity 400ms ease;
+}
+
+.error-msg {
+    display: inline-block;
+    text-align: left;
+    font-size: var(--fs-para);
+    color: var(--soft-red);
+    padding-inline-start: 1.5rem;
+    padding-block-start: 0.5rem;
+    opacity: 0;
+    transition: opacity 400ms ease;
+}
+
+
+
+/* ******************** */
+/*  MEDIA QUERY  */
+/* ******************** */
+
+@media screen and (min-width: 50em) {
+    body {
+        background-image: url(/images/bg-pattern-desktop.svg);
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+
+    .container {
+        grid: 11rem calc(100vh - 11rem) / 2fr 1.5fr;
+        grid-template-areas: 
+            "header hero-img"
+            "hero-text hero-img";
+    }
+
+    .logo {
+        margin-inline: calc((100% - 35rem) / 2);
+    }
+
+    .hero-text {
+        text-align: left;
+    }
+
+    .hero-img > * {
+        object-fit: cover;
+    }
+
+    .btn {
+        padding: 0.95rem 2.5rem;
+    }
+
+    .error-icon {
+        right: 110px;
+    }
+
+    .error-msg {
+        padding-inline-start: 1.5rem;
+        padding-block-start: 0.5rem;
+    }
+}
